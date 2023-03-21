@@ -15,6 +15,7 @@ class CreateAutoFilesTable extends Migration
     {
         Schema::create('auto_files', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->foreignId('auto_id',)->references('id')->on('autos')->primary('id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

@@ -15,6 +15,7 @@ class autoFile extends Model
      */
     protected $fillable = [
         "auto_id", 
+        "name", 
     ];
 
 }
