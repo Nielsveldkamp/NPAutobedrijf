@@ -33,6 +33,7 @@ class auto extends Model
         //      in kW
         // ---EV---
         // netto_max_vermogen elektrisch
+        
     protected $fillable = [
         "titel", 
         "kenteken", 

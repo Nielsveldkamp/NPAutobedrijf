@@ -142,20 +142,23 @@ class AutoController extends Controller
         ]);
             // moves file to storage and makes a directory with the kenteken
         foreach($request->files as $files){
-            mkdir('storage/'.$request->kenteken,0777,true);
+            if(!file_exists('storage/'.$request->kenteken)){
+                mkdir('storage/'.$request->kenteken,0777,true);
+            }
             foreach($files as $file){
                 $autoFile = AutoFile::create([
                 "auto_id" => $auto->id,
+                "name" => $file->getClientOriginalName()
                 ]);
-                   $file->move('storage/'.$request->kenteken,  "$autoFile->id.$file->getClientMimeType\\(\\)");
+                   $file->move('storage/'.$request->kenteken,  $file->getClientOriginalName());
             }
          }
-        return redirect("/auto/$auto->id");
+        return redirect("/autos/$auto->merk/$auto->type/$auto->id");
     }
 
     public function index( Request $request)
     {
-            $autos  = Auto::all();
+        $autos  = Auto::all();
         return view('auto/index')->with('autos', $autos);   
     }
     public function indexMerk($merk, Request $request)
@@ -170,24 +173,43 @@ class AutoController extends Controller
         return view('auto/index')->with('autos', $autos);   
     }
 
-    public function show($merk, $model, auto $auto){
-        $files = autoFile::where('auto_id',$auto->id)->get();
+    public function show($merk, $model, Auto $auto){
+        $files = AutoFile::where('auto_id',$auto->id)->get();
         return view('auto.show')->with('auto',$auto)->with('files',$files);
     }
 
-    public function change(Request $request,auto $auto){
+    public function change(Request $request,Auto $auto){
 
         return redirect("/auto/$auto->id");
     }
-    public function update(Request $request,auto $auto){
+    public function update(Request $request,Auto $auto){
 
         return redirect("/auto/$auto->id");
     }
     
-    public function delete(Request $request,$merk, $model, auto $auto){
-        auto::destroy($auto->id);
+    public function delete(Request $request,$merk, $model, Auto $auto){
+        
+        if(file_exists('storage/'.$auto->kenteken)){
+            $files = array_diff(scandir("storage/$auto->kenteken/"), array('.','..'));
+
+            foreach ($files as $file) {
+              (is_dir("storage/$auto->kenteken/$file")) 
+              ? is_dir("storage/$auto->kenteken/$file") 
+              : unlink("storage/$auto->kenteken/$file");
+        
+            }
+            rmdir('storage/'.$auto->kenteken,);
+        }
+        $files = AutoFile::where('auto_id',$auto->id)->get();
+        foreach($files as $file){
+            AutoFile::destroy($file->id);
+        }
+        Auto::destroy($auto->id);
+        
         $status = "auto is verwijdert";
-        $this->index($request);
+        
+        
+        return redirect("autos/");
     }
     
 }
