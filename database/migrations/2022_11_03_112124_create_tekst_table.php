@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTextTable extends Migration
+class CreateTekstTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTextTable extends Migration
      */
     public function up()
     {
-        Schema::create('text', function (Blueprint $table) {
+        Schema::create('tekst', function (Blueprint $table) {
             $table->id();
             $table->text('tekst')->nullable();;
         });
@@ -26,6 +26,6 @@ class CreateTextTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('algemene_info');
+        Schema::dropIfExists('tekst');
     }
 }

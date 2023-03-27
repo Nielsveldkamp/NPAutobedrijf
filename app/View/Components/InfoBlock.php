@@ -3,7 +3,7 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
-use App\Models\tekst;
+use App\Models\Tekst;
 
 class InfoBlock extends Component
 {
@@ -34,7 +34,7 @@ class InfoBlock extends Component
             $tekst->tekst = "";
         }
         
-        return view('components.info_block',
-        ['algemene_info' => $tekst,]);
+        return view('components.info-block',
+        ['tekst' => $tekst,]);
     }
 }
