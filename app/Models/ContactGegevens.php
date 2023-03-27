@@ -14,7 +14,7 @@ class ContactGegevens extends Model
 
     protected $fillable = [
         'email',
-        'adress',
+        'adres',
         'telefoonnummer',
     ];
 }

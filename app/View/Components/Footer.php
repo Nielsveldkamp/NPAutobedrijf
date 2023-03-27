@@ -34,6 +34,7 @@ private $contactGegevens;
             $contactGegevens = (object)[];
             $contactGegevens->telefoonnummer = "";
             $contactGegevens->email = "";
+            $contactGegevens->adres = "";
         }
         return view('components.footer',
         ['contact_gegevens' => $contactGegevens,]);

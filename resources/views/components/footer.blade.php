@@ -22,10 +22,13 @@
         height: 100px;">
         <div style=" margin-left: 3%; margin-top: 2%">
             <div>
-                telefoonnummer: telefoonnummervar
+                {{$contact_gegevens->adres}}
+            </div>
+            <div>
+                {{$contact_gegevens->telefoonnummer}}
             </div>
             <div style="word-wrap: anywhere">
-                email: emailvar
+                {{$contact_gegevens->email}}
             </div>
         </div>
     </div>

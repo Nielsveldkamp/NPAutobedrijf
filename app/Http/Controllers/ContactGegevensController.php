@@ -17,7 +17,8 @@ class ContactGegevensController extends Controller
         if(!isset($contactGegevens[0])){
             $contactGegevens = ContactGegevens::create([
                 "email" => ' ',
-                "telefoonnummer" => ' '
+                "telefoonnummer" => ' ',
+                "adres" => ' '
             ]);
         }
         else{
