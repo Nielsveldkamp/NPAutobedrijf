@@ -17,5 +17,7 @@ class autoFile extends Model
         "auto_id", 
         "name", 
     ];
-
+    public function Auto(){
+		return $this->belongsTo(Auto::class);
+	}
 }
