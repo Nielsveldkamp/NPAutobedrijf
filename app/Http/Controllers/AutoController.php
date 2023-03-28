@@ -56,12 +56,12 @@ class AutoController extends Controller
         if(count($brandstofApiResponse)>1){
             $brandstof = "Hybride";
             foreach($brandstofApiResponse as $brandstofSoort){
-                if($$brandstofSoort["brandstof_omschrijving"] === "Elektriciteit"){
-                    $netMaxVermogenElektrisch = $brandstofSoort["netto_max_vermogen_elektrisch"];
+                if($brandstofSoort["brandstof_omschrijving"] === "Elektriciteit"){
+                    $netMaxVermogenElektrisch = (isset($brandstofSoort['netto_max_vermogen_elektrisch'])? $brandstofSoort['netto_max_vermogen_elektrisch']: $brandstofSoort['nominaal_continu_maximumvermogen']);
                 }
                 elseif($brandstofSoort["brandstof_omschrijving"]=== "benzine"||"diesel"){
-                    $netMaxVermogen=$brandstofSoort["nettomaximumvermogen"];
-                    $verbruik = $brandstofSoort["brandstof_verbruik_gecombineerd_wltp"];
+                    $netMaxVermogen=(isset($brandstofSoort['nettomaximumvermogen'])? $brandstofSoort['nettomaximumvermogen']:"0");
+                    $verbruik = (isset($brandstofSoort['brandstof_verbruik_gecombineerd_wltp'])? $brandstofSoort['brandstof_verbruik_gecombineerd_wltp']:"0");
                 }
             }
         }
@@ -93,7 +93,6 @@ class AutoController extends Controller
             $kleur = $autoApiResponse->eerste_kleur;
         }
 
-
         if(isset($autoApiResponse->aantal_cilinders)){
             $aantalCilinders = $autoApiResponse->aantal_cilinders;
         }else{
@@ -112,6 +111,16 @@ class AutoController extends Controller
             $zuinigheidsclassificatie = "-";
         }
 
+        $websites = array_map(function($relUrl){        
+            $ret = parse_url($relUrl);
+           if ( !isset($ret["scheme"])and !empty($relUrl))
+            {
+            return "https://{$relUrl}";
+            }else{
+               return $relUrl;
+            }
+       },array_map('trim',preg_split('/\s+/',$request->websites)));
+
         $bouwjaar = substr($autoApiResponse->datum_eerste_toelating,0,4);
 
         $auto = Auto::create([
@@ -126,7 +135,7 @@ class AutoController extends Controller
             "apkVervaldatum" => $autoApiResponse->vervaldatum_apk,
             "kenteken" => $request->kenteken,
             "merk" => $autoApiResponse->merk,
-            "bouwjaar" => $autoApiResponse->datum_eerste_toelating,
+            "bouwjaar" => $bouwjaar,
             "carrosserie" => Http::get($autoApiResponse->api_gekentekende_voertuigen_carrosserie."?kenteken=".$autoApiResponse->kenteken)->json()[0]["type_carrosserie_europese_omschrijving"],
             "kleur" => $kleur,
             "brandstof" => $brandstof,
@@ -138,6 +147,7 @@ class AutoController extends Controller
             "verbruik" => $verbruik,
             "netMaxVermogen" => $netMaxVermogen,
             "netMaxVermogenElektrisch" => $netMaxVermogenElektrisch,
+            "websites" => $websites,
 
         ]);
             // moves file to storage and makes a directory with the kenteken
@@ -158,38 +168,77 @@ class AutoController extends Controller
 
     public function index( Request $request)
     {
-        $autos  = Auto::all();
+        $autos  = Auto::paginate(10);
+        
         return view('auto/index')->with('autos', $autos);   
     }
     public function indexMerk($merk, Request $request)
     {
-        $autos  = Auto::where('merk',$merk)->get();
+        $autos  = Auto::where('merk',$merk)->paginate(10);
         return view('auto/index')->with('autos', $autos);   
     }
 
     public function indexMerkModel($merk, $model, Request $request)
     {
-        $autos  = Auto::where('merk',$merk)->where('type',$model)->get();
+        $autos  = Auto::where('merk',$merk)->where('type',$model)->paginate(10);
         return view('auto/index')->with('autos', $autos);   
     }
 
     public function show($merk, $model, Auto $auto){
-        $files = AutoFile::where('auto_id',$auto->id)->get();
-        return view('auto.show')->with('auto',$auto)->with('files',$files);
+        return view('auto.show')->with('auto',$auto);
     }
 
     public function change(Request $request,Auto $auto){
-
-        return redirect("/auto/$auto->id");
+        return view('auto.change')->with('auto',$auto);
     }
     public function update(Request $request,Auto $auto){
+        
+        $auto->titel = $request->titel;
+        $auto->vraagprijs = $request->vraagprijs;
+        $auto->transmissie = $request->transmissie;
+        $auto->BTW = $request->BTW;
 
-        return redirect("/auto/$auto->id");
+        
+        $websites = array_map(function($relUrl){        
+            $ret = parse_url($relUrl);
+           if ( !isset($ret["scheme"])and !empty($relUrl))
+            {
+            return "https://{$relUrl}";
+            }else{
+               return $relUrl;
+            }
+       },array_map('trim',preg_split('/\s+/',$request->websites)));
+
+        $auto->websites = $websites;
+        $auto->omschrijving = $request->omschrijving;
+        $auto->save();
+        foreach($request->files as $files){
+            if(!file_exists('storage/'.$auto->kenteken)){
+                mkdir('storage/'.$auto->kenteken,0777,true);
+            }
+            foreach($files as $file){
+                $autoFile = AutoFile::create([
+                "auto_id" => $auto->id,
+                "name" => $file->getClientOriginalName()
+                ]);
+                   $file->move('storage/'.$auto->kenteken,  $file->getClientOriginalName());
+            }
+         }
+        
+        $status = "auto is aangepast";
+        return redirect("/autos/$auto->merk/$auto->type/$auto->id");
+    }
+
+    public function deleteFile(Request $request,Auto $auto, AutoFile $file){
+            unlink("storage/$auto->kenteken/$file->name");
+            AutoFile::destroy($file->id);
+            return redirect()->back()
+                    ->withInput($request->input());
     }
     
     public function delete(Request $request,$merk, $model, Auto $auto){
         
-        if(file_exists('storage/'.$auto->kenteken)){
+        if(file_exists("storage/$auto->kenteken")){
             $files = array_diff(scandir("storage/$auto->kenteken/"), array('.','..'));
 
             foreach ($files as $file) {
@@ -198,18 +247,53 @@ class AutoController extends Controller
               : unlink("storage/$auto->kenteken/$file");
         
             }
-            rmdir('storage/'.$auto->kenteken,);
+            rmdir("storage/$auto->kenteken");
         }
-        $files = AutoFile::where('auto_id',$auto->id)->get();
-        foreach($files as $file){
+        
+        foreach($auto->files as $file){
             AutoFile::destroy($file->id);
         }
         Auto::destroy($auto->id);
         
         $status = "auto is verwijdert";
-        
-        
         return redirect("autos/");
+    }
+    public function search(Request $request){
+        $autos = Auto::where([
+            [function($query)use($request){
+                if($request->merk !=null){
+                    $query->where('merk',$request->merk);
+                }
+                if($request->type !=null){
+                    $query->where('type',$request->type);
+                }
+                if($request->brandstof !=null){
+                    $query->where('brandstof',$request->brandstof);
+                }
+                if($request->carrosserie !=null){
+                    $query->where('carrosserie',$request->carrosserie);
+                }
+                if($request->vanaf !=null){
+                    $query->where('vraagprijs',">",$request->vanaf);
+                }
+                if($request->tm !=null){
+                    $query->where('vraagprijs','<',$request->tm);
+                }
+               
+                // prijs vanaf / tm
+            }]
+        ])->paginate(10);
+        return view('auto.index')->with('autos',$autos);
+    }
+
+    public function getSearchbarAjax(){
+        
+            $types = Auto::all('merk','type','carrosserie','brandstof')->unique('type')->groupBy(['merk']);
+            $brandstoffen = Auto::all('merk','type','brandstof')->unique('type')->groupBy(['brandstof','merk']);
+            $carrosseries = Auto::all('merk','type','carrosserie')->unique('type')->groupBy(['carrosserie','merk']);
+    
+            return response()->json(array('values'=> ['types'=>$types,'brandstoffen'=>$brandstoffen,'carrosseries'=>$carrosseries]), 200);
+
     }
     
 }
