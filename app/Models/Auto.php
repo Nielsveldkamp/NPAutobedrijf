@@ -13,26 +13,6 @@ class auto extends Model
      *
      * @var array<int, string>
      */
-            // voertuigsoort
-        // merk
-        // datum_toelating
-        // inrichting (carrosserie?)
-        // eerste en tweede kleur
-        // aantal cilinders (niet altijd. EV)
-        // cilinderinhoud (niet altijd. EV)
-        //    in cm3 / cc
-        // aantal_zitplaatsen
-        // apk vervaldatum
-        // massa_ledig_voertuig
-        // zuinigheids label
-        // VERBUIk L/100KM
-        //    Gecombineerd (hybrids)
-        //    1.200 = 1.2L
-        // ----Gas---
-        // nettomaximumvermogen
-        //      in kW
-        // ---EV---
-        // netto_max_vermogen elektrisch
         
     protected $fillable = [
         "titel", 
@@ -40,6 +20,7 @@ class auto extends Model
         "vraagprijs",
         "omschrijving",
         "extraAccessoires",
+        "websites",
         "transmissie",
         "BTW",
         "type",
@@ -59,5 +40,13 @@ class auto extends Model
         "netMaxVermogen",
         "netMaxVermogenElektrisch",
     ];
+    public function files()
+    {
+        return $this->hasMany(AutoFile::class);
+    }
 
+    public function mainFile()
+    {
+        return $this->hasOne(AutoFile::class)->oldestOfMany();
+    }
 }
