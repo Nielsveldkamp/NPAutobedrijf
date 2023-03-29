@@ -32,24 +32,19 @@
                         {{ __('Autos') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('main')" :active="request()->routeIs('main')">
-                        {{ __('Contact') }}
-                    </x-nav-link>
-                </div>
                 @auth
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('main')" :active="request()->routeIs('main')">
-                        {{ __('HomePage tekst aanpassen') }}
-                    </x-nav-link>
-                </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('auto.create')" :active="request()->routeIs('auto.create')">
                         {{ __('Auto toevoegen') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('main')" :active="request()->routeIs('main')">
+                    <x-nav-link :href="route('tekst.update')" :active="request()->routeIs('tekst.update')">
+                        {{ __('HomePage tekst aanpassen') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('contactGegevens.update')" :active="request()->routeIs('contactGegevens.update')">
                         {{ __('Contact gegevens aanpassen') }}
                     </x-nav-link>
                 </div>
@@ -115,9 +110,23 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden small:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('main')" :active="request()->routeIs('main')">
-                {{ __('main') }}
+        <x-responsive-nav-link :href="route('main')" :active="request()->routeIs('main')">
+                {{ __('Home') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('auto.index')" :active="request()->routeIs('auto.index')">
+                {{ __('autos') }}
+            </x-responsive-nav-link>
+            @auth
+            <x-responsive-nav-link :href="route('auto.index')" :active="request()->routeIs('auto.index')">
+                {{ __('auto toevoegen') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('tekst.update')" :active="request()->routeIs('tekst.update')">
+                {{ __('HomePage tekst aanpassen') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('contactGegevens.update')" :active="request()->routeIs('contactGegevens.update')">
+                {{ __('Contact gegevens aanpassen') }}
+            </x-responsive-nav-link>
+            @endauth
         </div>
 
 
@@ -147,5 +156,24 @@
                 Log in
                 </x-responsive-nav-linka>
             @endauth
+            <!-- searchbar -->
+            <div x-data="{ searchOpen: false }" >
+                <button  @click="searchOpen = ! searchOpen"
+                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                    <div :class="{ 'hidden': searchOpen, 'inline-flex': !searchOpen }">
+                        search
+                    </div>
+                    <div  :class="{ 'hidden': !searchOpen, 'inline-flex': searchOpen }">
+                        search X
+                    </div>
+                </button>
+                <div :class="{ 'block': searchOpen, 'hidden': !searchOpen }" class="hidden small:hidden">
+                    <div class="pt-2 pb-3 space-y-1">
+                        <x-search-bar view='-small' ></x-search-bar>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </div>
 </nav>
