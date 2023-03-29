@@ -111,7 +111,7 @@ class AutoController extends Controller
             $zuinigheidsclassificatie = "-";
         }
 
-        $websites = array_map(function($relUrl){        
+        $websites = json_encode(array_map(function($relUrl){        
             $ret = parse_url($relUrl);
            if ( !isset($ret["scheme"])and !empty($relUrl))
             {
@@ -119,7 +119,7 @@ class AutoController extends Controller
             }else{
                return $relUrl;
             }
-       },array_map('trim',preg_split('/\s+/',$request->websites)));
+       },array_map('trim',preg_split('/\s+/',$request->websites))));
 
         $bouwjaar = substr($autoApiResponse->datum_eerste_toelating,0,4);
 
