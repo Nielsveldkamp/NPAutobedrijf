@@ -46,7 +46,7 @@
                 @enderror
                 <x-label class="mt-4" for="websites" :value="__('andere websites')" />
                 <textarea oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' maxlength="220" style="resize: none; max-height: 13rem; height:3rem;" id="voorbeeld_websites"
-                class="block mt-2 w-full" type="text" name="websites">{{ old('websites', implode( json_decode($auto->websites),"\n") )}}</textarea>
+                class="block mt-2 w-full" type="text" name="websites">@if(!empty(old('websites'))){{ old('websites')}}@elseif(!empty($auto->website)) {{implode( json_decode($auto->websites),"\n")}}@endif</textarea>
 
                 @error('extraAccessoires')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
@@ -84,13 +84,15 @@
             
             <b class="row row-cols-1 row-cols-md-4 mt-4 imageFlexHeader"  style="padding-left:2%;">
             </b>
-            <div class="row row-cols-1 row-cols-md-4 mt-4 imageflex"  style="padding-left:2%;">
+            <div style="display: -ms-flexbox; margin:auto; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; justify-content: center;"class=" row-cols-1 row-cols-md-4 mt-4 ml-4 imageFlex">
+          
             </div>
         </div>
         <b class="row row-cols-1 row-cols-md-4 mt-4"  style="padding-left:2%;">
             afbeeldingen
             </b>
-        <div class="row row-cols-1 row-cols-md-4 mt-4 mb-5"  style="padding-left:2%;padding-right:2%;">
+            <div style="display: -ms-flexbox; margin:auto; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; justify-content: center;"class=" row-cols-1 row-cols-md-4 mt-4 ml-4 imageFlex">
+          
         @foreach ($auto->files as $file)
             <div class="col mb-5">
                 <div class="card">
@@ -102,7 +104,7 @@
                      action="{{ route('auto.deleteFile', [$auto->id, $file->id]) }}">
                      @csrf
                      @method('DELETE')
-                        <x-button class="btn btn-danger ml-2" onclick="return confirm('weet u het zeker?')">
+                        <x-button class="btn btn-danger ml-2" onclick="return confirm('weet u het?')">
                             <p class="fa fa-trash">verwijderen</p>
                         </x-button>
                     </form>
