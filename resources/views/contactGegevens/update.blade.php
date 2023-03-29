@@ -16,7 +16,7 @@
                 <!-- algemeneInfo -->
                 <div>
                     @error('telefoonnummer')
-                        <div class="alert text-sm text-red-600 alert-danger">{{ $message }}</div>
+                        <div class="alert text-sm text-red-600 alert-danger mt-4">{{ $message }}</div>
                     @enderror
                     <x-label for="telefoonnummer" :value="__('telefoon nummer')" />
                     <x-input maxlength="15" id="telefoonnummer" class="block mt-2 w-full" type="text" name="telefoonnummer"
@@ -26,7 +26,7 @@
                 
                 <div>
                      @error('adres')
-                        <div class="alert text-sm text-red-600 alert-danger">{{ $message }}</div>
+                        <div class="alert text-sm text-red-600 alert-danger mt-4">{{ $message }}</div>
                     @enderror
                     <x-label for="adres" :value="__('adres')" />
                     <x-input maxlength="255" id="adres" class="block mt-2 w-full" type="text" name="adres" :value="$contactGegevens->adres"
@@ -35,7 +35,7 @@
                 
                 <div>
                      @error('email')
-                        <div class="alert text-sm text-red-600 alert-danger">{{ $message }}</div>
+                        <div class="alert text-sm text-red-600 alert-danger mt-4 ">{{ $message }}</div>
                     @enderror
                     <x-label for="email" :value="__('email')" />
                     <x-input maxlength="255" id="email" class="block mt-2 w-full" type="text" name="email" :value="$contactGegevens->email"
