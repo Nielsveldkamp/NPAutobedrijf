@@ -20,7 +20,7 @@ class CreateAutosTable extends Migration
             $table->id();
             $table->string('titel');
             $table->string('kenteken')->unique();
-            $table->string('vraagprijs');
+            $table->unsignedDecimal('vraagprijs');
             $table->text('omschrijving');
             $table->string('transmissie');
             $table->text('websites')->nullable();
