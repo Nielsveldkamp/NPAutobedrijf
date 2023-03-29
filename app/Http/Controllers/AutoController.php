@@ -25,7 +25,7 @@ class AutoController extends Controller
         
         $rules = [
             "titel" => 'required|max:255',
-            "kenteken" => 'required|max:8:unique',
+            "kenteken" => 'required|max:8|unique:autos,kenteken',
             "omschrijving" => 'required',
             "vraagprijs" => 'required',
             "transmissie" => 'required',
@@ -130,7 +130,7 @@ class AutoController extends Controller
             "transmissie" => $request->transmissie,
             "BTW" => $request->BTW,
             "type" => $autoApiResponse->handelsbenaming,
-            "extraAccessoires" => "",
+            "extraAccessoires" =>  $request->extraAccessoires,
             "soort" => $autoApiResponse->voertuigsoort,
             "apkVervaldatum" => $autoApiResponse->vervaldatum_apk,
             "kenteken" => $request->kenteken,
@@ -192,7 +192,16 @@ class AutoController extends Controller
         return view('auto.change')->with('auto',$auto);
     }
     public function update(Request $request,Auto $auto){
-        
+        $rules = [
+            "titel" => 'required|max:255',
+            "omschrijving" => 'required',
+            "vraagprijs" => 'required',
+            "transmissie" => 'required',
+            "BTW" => 'required',
+            'files.*' => 'image|max:3145728',
+        ];
+        $request->validate($rules);
+
         $auto->titel = $request->titel;
         $auto->vraagprijs = $request->vraagprijs;
         $auto->transmissie = $request->transmissie;
@@ -211,6 +220,7 @@ class AutoController extends Controller
 
         $auto->websites = $websites;
         $auto->omschrijving = $request->omschrijving;
+        $auto->extraAccessoires = $request->extraAccessoires;
         $auto->save();
         foreach($request->files as $files){
             if(!file_exists('storage/'.$auto->kenteken)){
@@ -242,10 +252,7 @@ class AutoController extends Controller
             $files = array_diff(scandir("storage/$auto->kenteken/"), array('.','..'));
 
             foreach ($files as $file) {
-              (is_dir("storage/$auto->kenteken/$file")) 
-              ? is_dir("storage/$auto->kenteken/$file") 
-              : unlink("storage/$auto->kenteken/$file");
-        
+              unlink("storage/$auto->kenteken/$file");
             }
             rmdir("storage/$auto->kenteken");
         }
@@ -278,8 +285,7 @@ class AutoController extends Controller
                 }
                 if($request->tm !=null){
                     $query->where('vraagprijs','<',$request->tm);
-                }
-               
+                }       
                 // prijs vanaf / tm
             }]
         ])->paginate(10);
