@@ -52,6 +52,13 @@
                 <textarea oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' maxlength="220" style="resize: none; max-height: 13rem; height:3rem;" id="voorbeeld_websites"
                 class="block mt-2 w-full" type="text" name="websites">{{ old('websites') }}</textarea>
 
+                @error('extraAccessoires')
+                <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
+                @enderror
+                <x-label class="mt-4" for="extraAccessoires" :value="__('Extra accessoires')" />
+                <textarea oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' maxlength="800" style="resize: none; max-height: 300px; height:3rem;" id="omschrijving"
+                    class="block mt-2 w-full" type="text" name="extraAccessoires">{{ old('extraAccessoires') }}</textarea>
+
                 @error('omschrijving')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
