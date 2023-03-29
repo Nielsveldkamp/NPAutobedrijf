@@ -41,7 +41,7 @@ class CreateAutosTable extends Migration
             $table->unsignedInteger('stoelen');
             $table->unsignedInteger('deuren');
             $table->date('apkVervaldatum');
-            $table->text('extraAccessoires');
+            $table->text('extraAccessoires')->nullable();;
             $table->timestamps();
         });
     }
