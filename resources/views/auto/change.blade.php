@@ -48,6 +48,13 @@
                 <textarea oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' maxlength="220" style="resize: none; max-height: 13rem; height:3rem;" id="voorbeeld_websites"
                 class="block mt-2 w-full" type="text" name="websites">{{ old('websites', implode( json_decode($auto->websites),"\n") )}}</textarea>
 
+                @error('extraAccessoires')
+                <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
+                @enderror
+                <x-label class="mt-4" for="extraAccessoires" :value="__('Extra accessoires')" />
+                <textarea oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' maxlength="400" style="resize: none; max-height: 300px; height:3rem;" id="omschrijving"
+                    class="block mt-2 w-full" type="text" name="extraAccessoires">@if(old('extraAccessoires')){{old('extraAccessoires')}} @else {{$auto->extraAccessoires}} @endif</textarea>
+
                 @error('omschrijving')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
@@ -95,7 +102,7 @@
                      action="{{ route('auto.deleteFile', [$auto->id, $file->id]) }}">
                      @csrf
                      @method('DELETE')
-                        <x-button class="btn btn-danger ml-2" onclick="return confirm('Are you sure?')">
+                        <x-button class="btn btn-danger ml-2" onclick="return confirm('weet u het zeker?')">
                             <p class="fa fa-trash">verwijderen</p>
                         </x-button>
                     </form>
