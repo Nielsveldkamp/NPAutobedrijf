@@ -17,7 +17,7 @@ class CreateContactGegevensTable extends Migration
             $table->id();
             $table->string('telefoonnummer',15)->nullable();
             $table->string('email')->nullable();
-            $table->string('adress')->nullable();
+            $table->string('adres')->nullable();
             
         });
     }
