@@ -44,7 +44,7 @@
                                             action="{{ route('auto.delete', [$auto->merk, $auto->type, $auto->id]) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <x-button class="btn btn-danger ml-2" onclick="return confirm('Are you sure?')">
+                                            <x-button class="btn btn-danger ml-2" onclick="return confirm('weet u het zeker?')">
                                                 <p class="fa fa-trash">verwijderen</p>
                                             </x-button>
                                 </form>
@@ -252,17 +252,17 @@
                                 </table>
                             </td>
                         </tr>
-                        @if( $auto->extraAccessoirs)
+                        @if( $auto->extraAccessoires)
                         <tr>
                             <td>
                                 <b>
-                                    Extra accessoirs
+                                    Extra accessoires
                                 </b>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                {{$auto->extraAccessoirs}}
+                                {{$auto->extraAccessoires}}
                             </td>
                         </tr>
                         @endif
