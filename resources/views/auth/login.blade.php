@@ -1,8 +1,16 @@
 <x-guest-layout>
+    @include('layouts.navigation')
+    
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <div style=" height:100%; min-width:300px; " class="mr-4">
+                    <div style=" width:100%; height:100%; ">
+                            <div style=" height:100%; margin-left: 32.5vw; width: 30%;">
+                                <img src="{{ asset('img/logo.png') }}" alt="" style=" height:100%; ">
+                        </div>
+                    </div>
+                </div>
             </a>
         </x-slot>
 
@@ -53,4 +61,5 @@
             </div>
         </form>
     </x-auth-card>
+        <x-footer> </x-footer>
 </x-guest-layout>
