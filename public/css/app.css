@@ -1926,9 +1926,17 @@ option {
   .xl\:hidden {
     display: none;
   }
+
+  .sm\:w80 {
+    width: 80%;
+  }
 }
 
 @media (min-width: 1024px) {
+  .xl\:w50 {
+    width: 50%;
+  }
+
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;

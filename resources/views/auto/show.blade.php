@@ -57,7 +57,7 @@
                         <tr>
                             <td colspan="2">
                                 @if (isset($auto->mainFile))
-                                    <img style="padding-bottom: 20px; max-height: 277px; width:50rem;"
+                                    <img style="padding-bottom: 20px; max-height: 400px; min-width: 40vw; margin: auto;"
                                         src="{{ asset('storage/' . $auto->kenteken . '/' . $auto->mainFile->name) }}">
                             </td>
                             @endif
