@@ -854,7 +854,7 @@ input[type=number] {
 select,
 option {
   width: 12rem;
-  height: 2.2rem;
+  height: 2.4rem;
   margin: 4px 2vw 4px 2vw;
   font-family: inherit;
   font-size: 100%;
