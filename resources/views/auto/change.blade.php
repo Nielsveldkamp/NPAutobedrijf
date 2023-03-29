@@ -24,9 +24,10 @@
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
                 <x-label class="mt-4" for="vraagprijs" :value="__('vraagprijs')" />
-                <x-input maxlength="255" id="vraagprijs" class="block mt-2 w-full" type="number" name="vraagprijs"
-                    value="{{ old('vraagprijs', $auto->vraagprijs) }}" />
-
+                <span style="margin-left:-1rem;">€</span>
+                <input class="ml-1 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2"
+                maxlength="255" id="vraagprijs" type="number" name="vraagprijs" value="{{ old('vraagprijs', $auto->vraagprijs) }}">
+                
                 @error('transmissie')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror

@@ -1,4 +1,6 @@
-<script src="{{ asset('js/fileInput.js') }}" defer></script>
+<script src="{{ asset('js/fileInput.js') }}" defer>
+    
+</script>
 
 <x-guest-layout>
     <x-app-layout>
@@ -55,7 +57,7 @@
                 @error('extraAccessoires')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
-                <x-label class="mt-4" for="extraAccessoires" :value="__('Extra accessoires')" />
+                <x-label class="mt-4" for="omschrijving" :value="__('Extra Accessoires')" />
                 <textarea oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' maxlength="800" style="resize: none; max-height: 300px; height:3rem;" id="omschrijving"
                     class="block mt-2 w-full" type="text" name="extraAccessoires">{{ old('extraAccessoires') }}</textarea>
 
@@ -84,7 +86,9 @@
                 </div>
             </form>
         </x-auth-card>
-        <div class="row row-cols-1 row-cols-md-4 mt-4 imageflex"  style="padding-left:2%;">
+        <div class="row row-cols-1 row-cols-md-4 mt-4 imageFlexHeader" >
+        </div>
+        <div style="display: -ms-flexbox; margin:auto; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; justify-content: center;"class=" row-cols-1 row-cols-md-4 mt-4 ml-4 imageFlex">
             
         </div>
     </x-app-layout>

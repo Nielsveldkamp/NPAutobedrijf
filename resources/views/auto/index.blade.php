@@ -25,14 +25,14 @@
                             class="mt-6 mb-4 xl:hidden">
                             @if(isset($auto->mainFile))
                             <tr>
-                                <td rowspan="4" style="width:30%">
+                                <td rowspan="4" style="width:15%">
                                     
                                     <img style="height:96%; margin-left:3%; padding-right:4%;" src="{{ asset('storage/' . $auto->kenteken . '/' . $auto->mainFile->name) }}" alt="">
                                 </td>
                             </tr>
                             @endif
                             <tr>
-                                <td colspan="2"style="width:30%;">
+                                <td colspan="2"style="width:51%;">
                                     <div  class="text-xl ml-2" >
                                         <div>
                                             <a style ="word-wrap:anywhere;" class="underline " href="/autos/{{ $auto->merk }}/{{ $auto->type }}/{{ $auto->id }}"
