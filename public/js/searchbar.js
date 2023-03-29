@@ -38,17 +38,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
                     var merkBrandstoffen=[]
-                    if(merk == merkSelect.value  && merkSelect.value != ""){
+                    if(merk == merkSelect.value){
                         for(auto in types[merk] ){
                             // get all brandstof types for every auto type in brand
                                 merkBrandstoffen.push(types[merk][auto].brandstof);
                         }
-                    merkBrandstoffen =  Array.from(new Set(merkBrandstoffen));// gets all unique brandstof
+                    merkBrandstoffen =  Array.from(new Set(merkBrandstoffen));//  makes new array from unique unique brandstof
                     
-                    // als brandstof niet gebruikt word door het gekozen merk {add class hidden/disabled select}
+                    // als brandstof niet gebruikt word door het gekozen merk {add class disabledSelect and set option to disabled}
                     for(brandstof in brandstoffen){
                         let brandstofOption = document.querySelector('.'+brandstof)
-                            if( !merkBrandstoffen.includes(brandstof)){
+                            if( !merkBrandstoffen.includes(brandstof) && merkSelect.value != ""){
                                 brandstofOption.classList.add('disabledSelect');
                                 brandstofOption.disabled = true;
                             }
@@ -60,17 +60,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                     
                     var merkCarrosserieen=[]
-                    if(merk == merkSelect.value && merkSelect.value != ""){
+                    if(merk == merkSelect.value){
                         for(auto in types[merk] ){
                             // get all carrosserie types for every auto type in brand
                             merkCarrosserieen.push(types[merk][auto].carrosserie);
                         }
-                        merkCarrosserieen =  Array.from(new Set(merkCarrosserieen));// gets all unique brandstof
+                        merkCarrosserieen =  Array.from(new Set(merkCarrosserieen));// makes new array from unique carrosserieen
                     
-                    // als carrosserie niet gebruikt word door het gekozen merk {add class hidden/disabled select}
+                    // als carrosserie niet gebruikt word door het gekozen merk {add class disabled select and set option to disabled}
                     for(carrosserie in carrosserieen){
                         let carrosserieOption = document.querySelector('.'+carrosserie)
-                            if( !merkCarrosserieen.includes(carrosserie)){
+                            if( !merkCarrosserieen.includes(carrosserie) && merkSelect.value != ""){
                                 carrosserieOption.classList.add('disabledSelect');
                                 carrosserieOption.disabled = true;
                             }

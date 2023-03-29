@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
                     var merkBrandstoffen=[]
-                    if(merk == merkSelectSmall.value  && merkSelectSmall.value != ""){
+                    if(merk == merkSelectSmall.value){
                         for(auto in types[merk] ){
                             // get all brandstof types for every auto type in brand
                                 merkBrandstoffen.push(types[merk][auto].brandstof);
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // als brandstof niet gebruikt word door het gekozen merk {add class hidden/disabled select}
                     for(brandstof in brandstoffen){
                         let brandstofOption = document.querySelector('#'+brandstof)
-                            if( !merkBrandstoffen.includes(brandstof)){
+                            if( !merkBrandstoffen.includes(brandstof && merkSelectSmall.value != "")){
                                 brandstofOption.classList.add('disabledSelect');
                                 brandstofOption.disabled = true;
                             }
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                     
                     var merkCarrosserieen=[]
-                    if(merk == merkSelectSmall.value && merkSelectSmall.value != ""){
+                    if(merk == merkSelectSmall.value){
                         for(auto in types[merk] ){
                             // get all carrosserie types for every auto type in brand
                             merkCarrosserieen.push(types[merk][auto].carrosserie);
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // als carrosserie niet gebruikt word door het gekozen merk {add class hidden/disabled select}
                     for(carrosserie in carrosserieen){
                         let carrosserieOption = document.querySelector('#'+carrosserie)
-                            if( !merkCarrosserieen.includes(carrosserie)){
+                            if( !merkCarrosserieen.includes(carrosserie) && merkSelectSmall.value != ""){
                                 carrosserieOption.classList.add('disabledSelect');
                                 carrosserieOption.disabled = true;
                             }
