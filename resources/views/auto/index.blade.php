@@ -43,7 +43,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td  style="width:10%;">
                                     <div class="ml-2">
                                     <b>Merk: </b>
                                     {{$auto->merk}}
@@ -89,7 +89,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td style="vertical-align: text-top;">
                                     <div class="ml-2">
                                     <b>Merk: </b>
                                     {{$auto->merk}}
