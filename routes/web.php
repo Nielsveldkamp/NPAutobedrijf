@@ -30,6 +30,9 @@ Route::get('autos/{merk}', [App\Http\Controllers\AutoController::class, 'indexMe
 Route::get('autos/{merk}/{model}', [App\Http\Controllers\AutoController::class, 'indexMerkModel'])
 ->name('auto.indexMerkModel');
 
+Route::get('/search', [App\Http\Controllers\AutoController::class, 'search'])
+->name('auto.search');
+
 Route::get('/autos/{merk}/{model}/{auto}', [App\Http\Controllers\AutoController::class, 'show'])
 ->name('auto.show');
 
@@ -41,18 +44,21 @@ Route::post('/auto/store', [App\Http\Controllers\AutoController::class, 'store']
 ->middleware(['auth'])
 ->name('auto.store'); 
 
-
-Route::put('/autos/{merk}/{model}/{auto}/change', [App\Http\Controllers\AutoController::class, 'update'])
+Route::get('/auto/{auto}/change', [App\Http\Controllers\AutoController::class, 'change'])
 ->middleware(['auth'])
 ->name('auto.change');
 
-Route::put('/autos/{merk}/{model}/{auto}/update', [App\Http\Controllers\AutoController::class, 'update'])
+Route::put('/autos/{auto}/update', [App\Http\Controllers\AutoController::class, 'update'])
 ->middleware(['auth'])
 ->name('auto.update');
 
 Route::delete('/autos/{merk}/{model}/{auto}/delete', [App\Http\Controllers\AutoController::class, 'delete'])
 ->middleware(['auth'])
 ->name('auto.delete');
+
+Route::delete('/autos/{auto}/{file}/delete', [App\Http\Controllers\AutoController::class, 'deleteFile'])
+->middleware(['auth'])
+->name('auto.deleteFile');
 
 // <--------->
 // <--- main pagina tekst --->
@@ -76,5 +82,9 @@ Route::put('/contactGegevens/{contactGegevens}/store', [App\Http\Controllers\Con
 ->middleware(['auth'])
 ->name('contactGegevens.store'); 
 
+// <--------->
+// < searchbar ajax ->
+Route::post('/getSearchbar',[App\Http\Controllers\AutoController::class, 'getSearchbarAjax'])
+->name('auto.searchbarAjax'); ;
 // <--------->
 require __DIR__.'/auth.php';
