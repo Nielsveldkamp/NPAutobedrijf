@@ -36,6 +36,7 @@ class ContactGegevensController extends Controller
         ]);
         $contactGegevens->telefoonnummer = $request->telefoonnummer;
         $contactGegevens->email = $request->email;
+        $contactGegevens->adres = $request->adres;
         $contactGegevens->save();
         
 

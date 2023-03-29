@@ -20,7 +20,7 @@
         bottom: 0;
         width: 100%;
         height: 100px;">
-        <div style=" margin-left: 3%; margin-top: 2%">
+        <div style=" margin-left: 4%; margin-top: 0.65%">
             <div>
                 {{$contact_gegevens->adres}}
             </div>
