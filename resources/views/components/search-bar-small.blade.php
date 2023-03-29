@@ -1,5 +1,5 @@
 
-<script src="{{ asset('/js/searchbarNav.js') }}"></script>
+<script src="{{ asset('/js/searchbarNav.js') }}" defer></script>
 
 <div class="bg-gray-800 w-full">
 

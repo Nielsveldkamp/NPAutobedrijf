@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const merkSelect = document.querySelector('#merk')
         
             merkSelect.addEventListener('change' ,(event) => {
-                console.log(2)
                 for( var merk in types){
                     // run for every different brand
                     

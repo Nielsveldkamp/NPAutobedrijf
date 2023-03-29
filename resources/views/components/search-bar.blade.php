@@ -1,5 +1,5 @@
 @push('head')
-<script src="{{ asset('/js/searchbar.js') }}"></script>
+<script src="{{ asset('/js/searchbar.js') }}" defer></script>
 @endpush
 <div class="bg-gray-800 w-full xl:hidden">
 
