@@ -117,7 +117,7 @@
                 {{ __('autos') }}
             </x-responsive-nav-link>
             @auth
-            <x-responsive-nav-link :href="route('auto.index')" :active="request()->routeIs('auto.index')">
+            <x-responsive-nav-link :href="route('auto.create')" :active="request()->routeIs('auto.create')">
                 {{ __('auto toevoegen') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('tekst.update')" :active="request()->routeIs('tekst.update')">
@@ -159,9 +159,9 @@
             <!-- searchbar -->
             <div x-data="{ searchOpen: false }" >
                 <button  @click="searchOpen = ! searchOpen"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                    class="ml-3 inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <div :class="{ 'hidden': searchOpen, 'inline-flex': !searchOpen }">
-                        search
+                        Zoek
                     </div>
                     <div  :class="{ 'hidden': !searchOpen, 'inline-flex': searchOpen }">
                         search X
