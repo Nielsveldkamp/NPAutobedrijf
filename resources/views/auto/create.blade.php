@@ -14,23 +14,25 @@
                 @error('kenteken')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
-                <x-label class="mt-4" for="kenteken" :value="__('kenteken')" />
+                <x-label class="mt-4" for="kenteken" :value="__('Kenteken')" />
                 <x-input maxlength="255" id="kenteken" class="block mt-2 w-full" type="text" name="kenteken"
                     :value="old('kenteken')" />
                 
                 @error('titel')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
-                <x-label class="mt-4" for="titel" :value="__('titel')" />
+                <x-label class="mt-4" for="titel" :value="__('Titel')" />
                 <x-input maxlength="255" id="titel" class="block mt-2 w-full" type="text" name="titel"
                     :value="old('titel')" autofocus />
 
                 @error('vraagprijs')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
-                <x-label class="mt-4" for="vraagprijs" :value="__('vraagprijs')" />
-                <x-input maxlength="255" id="vraagprijs" class="block mt-2 w-full" type="text" name="vraagprijs"
-                    :value="old('vraagprijs')" />
+                <x-label class="mt-4" for="vraagprijs" :value="__('Vraagprijs')" />
+                <span style="margin-left:-1rem;">€</span>
+                <input class="ml-1 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2"
+                maxlength="255" id="vraagprijs" type="number" name="vraagprijs" value="{{ old('vraagprijs')}}">
+                
 
                 @error('transmissie')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
@@ -57,21 +59,21 @@
                 @error('extraAccessoires')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
-                <x-label class="mt-4" for="omschrijving" :value="__('Extra Accessoires')" />
+                <x-label class="mt-4" for="omschrijving" :value="__('Extra accessoires')" />
                 <textarea oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' maxlength="800" style="resize: none; max-height: 300px; height:3rem;" id="omschrijving"
                     class="block mt-2 w-full" type="text" name="extraAccessoires">{{ old('extraAccessoires') }}</textarea>
 
                 @error('omschrijving')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
-                <x-label class="mt-4" for="omschrijving" :value="__('omschrijving')" />
+                <x-label class="mt-4" for="omschrijving" :value="__('Omschrijving')" />
                 <textarea oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' maxlength="800" style="resize: none; max-height: 300px; height:3rem;" id="omschrijving"
                     class="block mt-2 w-full" type="text" name="omschrijving">{{ old('omschrijving') }}</textarea>
 
                 @error('files.*')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
-                <x-label class="mt-4" for="afbeeldingen" :value="__('afbeeldingen')" />
+                <x-label class="mt-4" for="afbeeldingen" :value="__('Afbeeldingen')" />
                 <div class="file-area mt-2">
                     <input id="fileInput" type="file"  onchange="loadFile(event)" name="files[]" multiple accept="image/*">
                     <div class="file-dummy">
