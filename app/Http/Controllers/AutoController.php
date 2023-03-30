@@ -27,7 +27,7 @@ class AutoController extends Controller
             "titel" => 'required|max:255',
             "kenteken" => 'required|max:8|unique:autos,kenteken',
             "omschrijving" => 'required',
-            "vraagprijs" => 'required',
+            "vraagprijs" => 'required|number',
             "transmissie" => 'required',
             "BTW" => 'required',
             'files.*' => 'image|max:3145728',
@@ -81,7 +81,7 @@ class AutoController extends Controller
             }
             else{
                 $netMaxVermogen=$brandstofApiResponse["nettomaximumvermogen"];
-                $verbruik = $brandstofApiResponse["brandstofverbruik_gecombineerd"];
+                $verbruik = (isset($brandstofApiResponse["brandstofverbruik_gecombineerd"])?$brandstofApiResponse["brandstofverbruik_gecombineerd"]:"0");
                 $netMaxVermogenElektrisch = 0;
             }
         }
@@ -148,9 +148,8 @@ class AutoController extends Controller
             "netMaxVermogen" => $netMaxVermogen,
             "netMaxVermogenElektrisch" => $netMaxVermogenElektrisch,
             "websites" => $websites,
-
         ]);
-            // moves file to storage and makes a directory with the kenteken
+        // moves file to storage and makes a directory with the kenteken as name and adds the file to the database
         foreach($request->files as $files){
             if(!file_exists('storage/'.$request->kenteken)){
                 mkdir('storage/'.$request->kenteken,0777,true);
@@ -286,7 +285,6 @@ class AutoController extends Controller
                 if($request->tm !=null){
                     $query->where('vraagprijs','<',$request->tm);
                 }       
-                // prijs vanaf / tm
             }]
         ])->paginate(10);
         return view('auto.index')->with('autos',$autos);
