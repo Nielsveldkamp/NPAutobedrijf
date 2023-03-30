@@ -27,7 +27,7 @@ class AutoController extends Controller
             "titel" => 'required|max:255',
             "kenteken" => 'required|max:8|unique:autos,kenteken',
             "omschrijving" => 'required',
-            "vraagprijs" => 'required|number',
+            "vraagprijs" => 'required|Numeric',
             "transmissie" => 'required',
             "BTW" => 'required',
             'files.*' => 'image|max:3145728',
@@ -194,7 +194,7 @@ class AutoController extends Controller
         $rules = [
             "titel" => 'required|max:255',
             "omschrijving" => 'required',
-            "vraagprijs" => 'required|number',
+            "vraagprijs" => 'required|Numeric',
             "transmissie" => 'required',
             "BTW" => 'required',
             'files.*' => 'image|max:3145728',
