@@ -194,7 +194,7 @@ class AutoController extends Controller
         $rules = [
             "titel" => 'required|max:255',
             "omschrijving" => 'required',
-            "vraagprijs" => 'required',
+            "vraagprijs" => 'required|number',
             "transmissie" => 'required',
             "BTW" => 'required',
             'files.*' => 'image|max:3145728',
