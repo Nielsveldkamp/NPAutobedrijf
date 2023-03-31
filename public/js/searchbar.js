@@ -51,17 +51,16 @@ document.addEventListener("DOMContentLoaded", () => {
                         // als brandstof niet gebruikt word door het gekozen merk {add class disabledSelect and set option to disabled}
                         for(brandstof in brandstoffen){
                             let brandstofOption = document.querySelector('.'+brandstof)
-                                if( !merkBrandstoffen.includes(brandstof) && merkSelect.value != ""){
-                                    brandstofOption.classList.add('disabledSelect');
-                                    brandstofOption.disabled = true;
-                                }
-                                else{
-                                    brandstofOption.classList.remove('disabledSelect');
-                                    brandstofOption.disabled = false;
-                                }
+                            if( !merkBrandstoffen.includes(brandstof) && merkSelect.value != ""){
+                                brandstofOption.classList.add('disabledSelect');
+                                brandstofOption.disabled = true;
+                            }
+                            else{
+                                brandstofOption.classList.remove('disabledSelect');
+                                brandstofOption.disabled = false;
                             }
                         }
-
+                    }
 
                     var merkCarrosserieen=[]
                     if(merk == merkSelect.value || merkSelect.value==""){
@@ -76,8 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             merkCarrosserieen =  Array.from(new Set(merkCarrosserieen));//  makes new array from unique carrosserie
                         }
                     // als carrosserie niet gebruikt word door het gekozen merk {add class disabled select and set option to disabled}
-                    for(carrosserie in carrosserieen){
-                        let carrosserieOption = document.querySelector('.'+carrosserie)
+                        for(carrosserie in carrosserieen){
+                            let carrosserieOption = document.querySelector('.'+carrosserie)
                             if( !merkCarrosserieen.includes(carrosserie) && merkSelect.value != ""){
                                 carrosserieOption.classList.add('disabledSelect');
                                 carrosserieOption.disabled = true;
