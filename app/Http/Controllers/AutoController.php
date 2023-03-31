@@ -53,6 +53,9 @@ class AutoController extends Controller
         $brandstofApiResponse= Http::get($autoApiResponse->api_gekentekende_voertuigen_brandstof."?kenteken=".$autoApiResponse->kenteken)->json();
     //  check brandstof type.
     //  meerdere verschillende types betekent dat het hybride is 
+    //  ook kijkt deze code of de properties
+    //  "netto_max_vermogen_elektrisch", "brandstof_verbruik_gecombineerd_wltp", "nettomaximumvermogen", "brandstofverbruik_gecombineerd" 
+    //  er zijn zo niet vervang ik ze met een vergelijkbare propertie of als die er niet is met 0
         if(count($brandstofApiResponse)>1){
             $brandstof = "Hybride";
             foreach($brandstofApiResponse as $brandstofSoort){
@@ -206,7 +209,7 @@ class AutoController extends Controller
         $auto->transmissie = $request->transmissie;
         $auto->BTW = $request->BTW;
 
-        
+
         $websites = array_map(function($relUrl){        
             $ret = parse_url($relUrl);
            if ( !isset($ret["scheme"])and !empty($relUrl))
