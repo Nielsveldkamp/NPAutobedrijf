@@ -162,7 +162,9 @@ class AutoController extends Controller
                 "auto_id" => $auto->id,
                 "name" => $file->getClientOriginalName()
                 ]);
-                   $file->move('storage/'.$request->kenteken,  $file->getClientOriginalName());
+                $autoFile->name = $autoFile->id.$autoFile->name;
+                $autoFile->save();
+                $file->move('storage/'.$auto->kenteken, $autoFile->name);
             }
          }
         return redirect("/autos/$auto->merk/$auto->type/$auto->id");
@@ -224,16 +226,19 @@ class AutoController extends Controller
         $auto->omschrijving = $request->omschrijving;
         $auto->extraAccessoires = $request->extraAccessoires;
         $auto->save();
+
         foreach($request->files as $files){
             if(!file_exists('storage/'.$auto->kenteken)){
                 mkdir('storage/'.$auto->kenteken,0777,true);
             }
-            foreach($files as $file){
+            foreach($files as $file){                
                 $autoFile = AutoFile::create([
-                "auto_id" => $auto->id,
-                "name" => $file->getClientOriginalName()
+                    "auto_id" => $auto->id,
+                    "name" => $file->getClientOriginalName()
                 ]);
-                   $file->move('storage/'.$auto->kenteken,  $file->getClientOriginalName());
+                $autoFile->name = $autoFile->id.$autoFile->name;
+                $autoFile->save();
+                $file->move('storage/'.$auto->kenteken, $autoFile->name);
             }
          }
         
@@ -241,11 +246,11 @@ class AutoController extends Controller
         return redirect("/autos/$auto->merk/$auto->type/$auto->id");
     }
 
-    public function deleteFile(Request $request,Auto $auto, AutoFile $file){
-            unlink("storage/$auto->kenteken/$file->name");
-            AutoFile::destroy($file->id);
-            return redirect()->back()
-                    ->withInput($request->input());
+    public function ajaxDeleteFile(Request $request, AutoFile $autoFile){
+        $auto = $autoFile->Auto()->get()[0];
+            unlink("storage/$auto->kenteken/$autoFile->name");
+            AutoFile::destroy($autoFile->id);
+            return json_decode([400]);
     }
     
     public function delete(Request $request,$merk, $model, Auto $auto){

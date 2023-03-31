@@ -18,6 +18,6 @@ class autoFile extends Model
         "name", 
     ];
     public function Auto(){
-		return $this->belongsTo(Auto::class);
+		return $this->belongsTo(Auto::class,'auto_id','id');
 	}
 }

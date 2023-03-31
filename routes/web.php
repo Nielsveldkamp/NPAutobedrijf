@@ -56,8 +56,7 @@ Route::delete('/autos/{merk}/{model}/{auto}/delete', [App\Http\Controllers\AutoC
 ->middleware(['auth'])
 ->name('auto.delete');
 
-Route::delete('/autos/{auto}/{file}/delete', [App\Http\Controllers\AutoController::class, 'deleteFile'])
-->middleware(['auth'])
+Route::delete('/deleteFile/{autoFile}', [App\Http\Controllers\AutoController::class, 'ajaxDeleteFile'])
 ->name('auto.deleteFile');
 
 // <--------->

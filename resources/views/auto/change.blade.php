@@ -1,4 +1,5 @@
 <script src="{{ asset('js/fileInput.js') }}" defer></script>
+<script src="{{ asset('js/deleteFile.js') }}" defer></script>
 
 <x-guest-layout>
     <x-app-layout>
@@ -80,9 +81,8 @@
                     </x-button>
                 </div>
             </form>
-        </x-auth-card>
+        </x-form-card>
         <div>
-            
             <b class="row row-cols-1 row-cols-md-4 mt-4 imageFlexHeader"  style="padding-left:2%;">
             </b>
             <div style="display: -ms-flexbox; margin:auto; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; justify-content: center;"class=" row-cols-1 row-cols-md-4 mt-4 ml-4 imageFlex">
@@ -91,31 +91,26 @@
         </div>
         <b class="row row-cols-1 row-cols-md-4 mt-4"  style="padding-left:2%;">
             afbeeldingen
-            </b>
-            <div style="display: -ms-flexbox; margin:auto; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; justify-content: center;"class=" row-cols-1 row-cols-md-4 mt-4 ml-4 imageFlex">
-          
+        </b>
+        <div style="display: -ms-flexbox; margin:auto; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; justify-content: center;"class=" row-cols-1 row-cols-md-4 mt-4 ml-4 imageFlex">
+            
         @foreach ($auto->files as $file)
-            <div class="col mb-5">
+            <div class="col mb-5" id="img{{$file->id}}">
                 <div class="card">
                     <img class="img"
                         src="{{ asset('storage/' . $auto->kenteken . '/' . $file->name) }}"
-                    alt="">
+                        alt="">
                     <div>
-                    <form autocomplete="off" method="post"
-                     action="{{ route('auto.deleteFile', [$auto->id, $file->id]) }}">
-                     @csrf
-                     @method('DELETE')
-                        <x-button class="btn btn-danger ml-2" onclick="return confirm('weet u het?')">
-                            <p class="fa fa-trash">verwijderen</p>
-                        </x-button>
-                    </form>
-                </div>    
-                </div>
-                
-            </div>
-        @endforeach
-        </div>
                         
-       
+                        <button class="btn btn-danger ml-2"  onclick="deleteFile({{$file->id}})">
+                            <p class="fa fa-trash">verwijderen</p>
+                        </button>
+                       
+                    </div>    
+                </div>
+            </div>
+            @endforeach
+        </div>
+            
     </x-app-layout>
 </x-guest-layout>
