@@ -1,25 +1,3 @@
-<style>
-
-    .row{
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: 0px !important;
-    margin-left: 0px !important;
-    justify-content: center;
-    }
-    .card{
-        height:100%;
-    }
-    .col{
-        height: 191px;
-    }
-    .img{
-        height: 191px;
-    }
-    
-</style>
 <x-app-layout>
     <div class="">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -286,7 +264,7 @@
 
                     <div class="row row-cols-1 row-cols-md-4 mt-8">
                         @foreach ($auto->files as $file)
-                        @if($file !=$auto->files[0])
+                        @if($file !=$auto->mainFile)
                             <div class="col ">
                                 <div class="card">
                                     <img class="img"
@@ -582,9 +560,9 @@
                         @endif
                     </table>
 
-                    <div class="row row-cols-1 row-cols-md-4 mt-8">
+                    <div class="row row-cols-1 row-cols-md-4 mt-8 lg:hidden">
                         @foreach ($auto->files as $file)
-                        @if($file !=$auto->files[0])
+                        @if($file !=$auto->mainFile)
                             <div class="col ">
                                 <div class="card">
                                     <img class="img"

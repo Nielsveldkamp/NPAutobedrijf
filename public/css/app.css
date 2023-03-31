@@ -932,6 +932,7 @@ option {
 
 .card {
   height: 100%;
+  width: fit-content;
 }
 
 .img {
