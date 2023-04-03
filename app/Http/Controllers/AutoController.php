@@ -300,12 +300,20 @@ class AutoController extends Controller
 
     public function getSearchbarAjax(){
         
-            $types = Auto::all('merk','type','carrosserie','brandstof')->unique('type')->groupBy(['merk']);
-            $brandstoffen = Auto::all('merk','type','brandstof')->unique('type')->groupBy(['brandstof','merk']);
-            $carrosseries = Auto::all('merk','type','carrosserie')->unique('type')->groupBy(['carrosserie','merk']);
-    
-            return response()->json(array('values'=> ['types'=>$types,'brandstoffen'=>$brandstoffen,'carrosseries'=>$carrosseries]), 200);
-
+        return response()->json([
+            'values' => [
+                'types' => Auto::all('merk', 'type', 'carrosserie', 'brandstof')
+                            ->unique('type')
+                            ->groupBy('merk'),
+                'brandstoffen' => Auto::all('merk', 'type', 'brandstof')
+                                    ->unique('type')
+                                    ->groupBy(['brandstof', 'merk']),
+                'carrosseries' => Auto::all('merk', 'type', 'carrosserie')
+                                    ->unique('type')
+                                    ->groupBy(['carrosserie', 'merk'])
+            ]
+        ], 200);
+        
     }
     
 }
