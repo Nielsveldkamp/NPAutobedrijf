@@ -825,6 +825,10 @@ input[type=number] {
   color: #e8ebf2
 }
 
+[class*=nrg--] .text:before {
+  color: #ffffff;
+}
+
 .-mb-4 {
   margin-bottom: -1rem;
 }
