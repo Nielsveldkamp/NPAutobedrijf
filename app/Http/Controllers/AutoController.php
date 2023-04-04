@@ -20,7 +20,7 @@ class AutoController extends Controller
 
     public function store(Request $request){
         
-        $kenteken = str_replace('-','',$request->kenteken);
+        $kenteken = strtoupper(str_replace('-','',$request->kenteken));
         $autoApiResponse = Http::get("https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=".str_replace("-", "", trim($request->kenteken)))->json();
         
         $rules = [
