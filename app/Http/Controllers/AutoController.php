@@ -20,8 +20,8 @@ class AutoController extends Controller
 
     public function store(Request $request){
         
-        $kenteken = $request->kenteken;
-        $autoApiResponse = Http::get("https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=".$kenteken)->json();
+        $kenteken = strtoupper($request->kenteken);
+        $autoApiResponse = Http::get("https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=".strtoupper(str_replace("-", "", trim($request->kenteken))))->json();
         
         $rules = [
             "titel" => 'required|max:255',
