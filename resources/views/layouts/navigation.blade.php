@@ -40,7 +40,7 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('tekst.update')" :active="request()->routeIs('tekst.update')">
-                        {{ __('HomePage tekst aanpassen') }}
+                        {{ __('Home Page aanpassen') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -121,7 +121,7 @@
                 {{ __('auto toevoegen') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('tekst.update')" :active="request()->routeIs('tekst.update')">
-                {{ __('HomePage tekst aanpassen') }}
+                {{ __('Home Page aanpassen') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('contactGegevens.update')" :active="request()->routeIs('contactGegevens.update')">
                 {{ __('Contact gegevens aanpassen') }}
@@ -164,7 +164,7 @@
                         Zoek
                     </div>
                     <div  :class="{ 'hidden': !searchOpen, 'inline-flex': searchOpen }">
-                        search X
+                        Zoek X
                     </div>
                 </button>
                 <div :class="{ 'block': searchOpen, 'hidden': !searchOpen }" class="hidden small:hidden">
