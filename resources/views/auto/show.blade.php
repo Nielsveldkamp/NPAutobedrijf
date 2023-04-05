@@ -8,12 +8,7 @@
                     <!------ ------ large screen ------ ------>
 
                     <table style="width: 95%; table-layout: auto;" class="mt-3 ml-12 xl:hidden">
-                        <tr>
-                            <td>
-                                <a class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 btn mr-2"
-                                href="{{ URL::previous() }}">terug</a>
-                            </td>
-                        </tr>
+
                         <tr>
                             @auth
                             <td  style=" width: 80%;">
@@ -36,6 +31,11 @@
                             </td>
                             
                             @endauth
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 btn mr-2"
+                                href="{{ URL::previous() }}">terug</a>
                             </td>
                         </tr>
                         <tr>
@@ -286,40 +286,42 @@
                     <!-- ------------------------------------------------ small screen ------------------------------------------------------------------- -->
                     
                     <table style="width: 95%; table-layout: auto; margin:auto;" class="mt-3 lg:hidden">
-                        <tr>
-                                <td>
-                                    <a class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 btn mr-2"
-                                    href="{{ URL::previous() }}">terug</a>
-                                </td>
-                            </tr>    
-                        <tr>
+                 
                         @auth
-                        <td  style=" width: 10%;">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <a class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 btn mr-2"
-                                            href="{{route('auto.change', $auto)}}" class="btn mr-2">
-                                            <p class="fa fa-trash">aanpassen</p>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <form style="margin-block-end: 0em;" autocomplete="off" method="post"
-                                            action="{{ route('auto.delete', [$auto->merk, $auto->type, $auto->id]) }}">
-                                            @csrf
-                                            @method('DELETE')
-                                                <x-button class="btn btn-danger ml-2" onclick="return confirm('weet u het zeker?')">
-                                                    <p class="fa fa-trash">verwijderen</p>
-                                                </x-button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                            
+                        <tr>
+                            <td  style=" width: 10%;">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 btn mr-2"
+                                                href="{{route('auto.change', $auto)}}" class="btn mr-2">
+                                                <p class="fa fa-trash">aanpassen</p>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <form style="margin-block-end: 0em;" autocomplete="off" method="post"
+                                                action="{{ route('auto.delete', [$auto->merk, $auto->type, $auto->id]) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                    <x-button class="btn btn-danger ml-2" onclick="return confirm('weet u het zeker?')">
+                                                        <p class="fa fa-trash">verwijderen</p>
+                                                    </x-button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>    
                             @endauth
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                    <a class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 btn mr-2"
+                                    href="{{ URL::previous() }}">terug</a>
+                            </td>
+                        </tr>    
+                        <tr>
                         <tr>
                             <td>
                                 @if (isset($auto->mainFile))
