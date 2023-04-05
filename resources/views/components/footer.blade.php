@@ -11,7 +11,7 @@
         height: 100px;
     }
 </style>
-<div>
+<div style="margin-top:25vh;">
     <div
         style="
         color:white;
@@ -19,17 +19,24 @@
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: 100px;">
-        <div style=" margin-left: 4%; margin-top: 0.65%">
+        min-height: 300px;">
+        <div style="display:flex;" class="smallDisplayCollumn">
+            <div style=" margin-left: 4%; margin-top: 0.65%; margin-right: 4%;">            
+                <div style="margin-top:1vh;">
+                    {{$contact_gegevens->adres}}
+                </div>
+                <div style="margin-top:1vh;">
+                    {{$contact_gegevens->telefoonnummer}}
+                </div>
+                <div style="margin-top:1vh; margin-bottom:3vh; word-wrap: anywhere">
+                    {{$contact_gegevens->email}}
+                </div>
+            </div>
+        
             <div>
-                {{$contact_gegevens->adres}}
-            </div>
-            <div>
-                {{$contact_gegevens->telefoonnummer}}
-            </div>
-            <div style="word-wrap: anywhere">
-                {{$contact_gegevens->email}}
-            </div>
+            <x-google-maps-widget :adres="$contact_gegevens->adres">    
+            </x-google-maps-widget>
+        </div>
         </div>
     </div>
 </div>

@@ -1841,6 +1841,7 @@ option {
   .lg\:max-w-md {
     max-width: 36rem;
   }
+
 }
 
 @media (min-width: 640px) {
@@ -1947,6 +1948,11 @@ option {
   .sm\:w80 {
     width: 80%;
   }
+
+  .smallDisplayCollumn {
+    flex-direction: column;
+  }
+
 }
 
 @media (min-width: 1024px) {
