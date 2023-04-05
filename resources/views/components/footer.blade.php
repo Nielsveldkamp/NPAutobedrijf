@@ -34,9 +34,11 @@
             </div>
         
             <div>
-            <x-google-maps-widget :adres="$contact_gegevens->adres">    
-            </x-google-maps-widget>
-        </div>
+                @if(!empty($contact_gegevens->adres))
+                <x-google-maps-widget :adres="$contact_gegevens->adres">    
+                </x-google-maps-widget>
+                @endif
+            </div>
         </div>
     </div>
 </div>
