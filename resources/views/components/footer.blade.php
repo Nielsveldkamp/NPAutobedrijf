@@ -34,7 +34,7 @@
             </div>
         
             <div>
-                @if(!empty($contact_gegevens->adres))
+                @if(!empty($contact_gegevens->adres && isset($contact_gegevens->adres)))
                 <x-google-maps-widget :adres="$contact_gegevens->adres">    
                 </x-google-maps-widget>
                 @endif
