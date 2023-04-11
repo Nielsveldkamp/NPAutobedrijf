@@ -32,13 +32,15 @@
                     {{$contact_gegevens->email}}
                 </div>
             </div>
+            
+            @if(!empty($contact_gegevens->adres) && isset($contact_gegevens->adres) && isset($contact_gegevens))
         
             <div>
-                @if(!empty($contact_gegevens->adres && isset($contact_gegevens->adres)))
                 <x-google-maps-widget :adres="$contact_gegevens->adres">    
                 </x-google-maps-widget>
-                @endif
+                
             </div>
+            @endif
         </div>
     </div>
 </div>
