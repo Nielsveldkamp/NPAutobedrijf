@@ -15,7 +15,7 @@ class AutoController extends Controller
 {
     public function create()
     {
-        return view('auto\create');
+        return view('auto.create');
     }
 
     public function store(Request $request){

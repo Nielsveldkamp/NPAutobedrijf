@@ -24,7 +24,7 @@ class ContactGegevensController extends Controller
         else{
             $contactGegevens = $contactGegevens[0];
         }
-        return view('contactGegevens\update')->with('contactGegevens', $contactGegevens);
+        return view('contactGegevens.update')->with('contactGegevens', $contactGegevens);
     }
 
     
