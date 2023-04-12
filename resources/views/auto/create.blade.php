@@ -45,8 +45,8 @@
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
                 <x-label class="mt-4" for="titel" :value="__('BTW')" />
-                <input type="radio" name="BTW" value="ja, BTW"                {{ (empty(old('BTW'))) ? "" :(old('BTW') =="ja, BTW")?"checked":""}} > ja, BTW
-                <input type="radio" name="BTW" value="nee, marge" class="ml-4"{{ (empty(old('BTW'))) ? "" :(old('BTW') =="nee, marge")?"checked":""}}  > nee, marge 
+                <input type="radio" name="BTW" value="ja, BTW"                {{ (empty(old('BTW'))) ? "" :((old('BTW') =="ja, BTW")?"checked":"")}} > ja, BTW
+                <input type="radio" name="BTW" value="nee, marge" class="ml-4"{{ (empty(old('BTW'))) ? "" :((old('BTW') =="nee, marge")?"checked":"")}}  > nee, marge 
                 
                 @error('websites')
                 <div class="alert text-sm text-red-600 alert-danger">{{ $message }}</div>

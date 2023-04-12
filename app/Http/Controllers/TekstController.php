@@ -22,7 +22,7 @@ class TekstController extends Controller
         else{
             $tekst = $tekst[0];
         }
-        return view('tekst\update')->with('tekst', $tekst);
+        return view('tekst.update')->with('tekst', $tekst);
     }
 
     

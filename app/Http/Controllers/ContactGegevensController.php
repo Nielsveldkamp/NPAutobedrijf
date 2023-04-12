@@ -16,15 +16,15 @@ class ContactGegevensController extends Controller
         ContactGegevens::all();
         if(!isset($contactGegevens[0])){
             $contactGegevens = ContactGegevens::create([
-                "email" => ' ',
-                "telefoonnummer" => ' ',
-                "adres" => ' '
+                "email" => '',
+                "telefoonnummer" => '',
+                "adres" => ''
             ]);
         }
         else{
             $contactGegevens = $contactGegevens[0];
         }
-        return view('contactGegevens\update')->with('contactGegevens', $contactGegevens);
+        return view('contactGegevens.update')->with('contactGegevens', $contactGegevens);
     }
 
     

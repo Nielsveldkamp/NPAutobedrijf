@@ -11,7 +11,7 @@
         height: 100px;
     }
 </style>
-<div style="margin-top:25vh;">
+<div style="margin-top:45vh;">
     <div
         style="
         color:white;
@@ -32,11 +32,15 @@
                     {{$contact_gegevens->email}}
                 </div>
             </div>
+            
+            @if(!empty($contact_gegevens->adres) && isset($contact_gegevens->adres) && isset($contact_gegevens))
         
             <div>
-            <x-google-maps-widget :adres="$contact_gegevens->adres">    
-            </x-google-maps-widget>
-        </div>
+                <x-google-maps-widget :adres="$contact_gegevens->adres">    
+                </x-google-maps-widget>
+                
+            </div>
+            @endif
         </div>
     </div>
 </div>
