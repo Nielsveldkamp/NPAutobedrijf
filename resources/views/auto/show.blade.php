@@ -331,7 +331,7 @@
                             @endif
                         </tr>
                         <tr style="font-size: 2em;">
-                            <td style="max-width:85%; width:100%;">
+                            <td style="max-width:82%; width:100%;">
                                 <div style="display: flex; align-items: baseline;">
                                     
                                     <b style="word-wrap:anywhere;">
@@ -342,9 +342,9 @@
                         </tr>
                         <tr>
                             <td>
-                                <div style="display: flex; align-items: baseline;"> 
-                                    <b >
-                                        € {{ trim($auto->vraagprijs) }}
+                                <div>
+                                    <b style="white-space: nowrap;" >
+                                        € {{ $auto->vraagprijs }}
                                     </b>
                                 </div>
                             </td>
