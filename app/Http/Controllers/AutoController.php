@@ -136,7 +136,7 @@ class AutoController extends Controller
             "extraAccessoires" =>  $request->extraAccessoires,
             "soort" => $autoApiResponse->voertuigsoort,
             "apkVervaldatum" => $autoApiResponse->vervaldatum_apk,
-            "kenteken" => $request->kenteken,
+            "kenteken" => $kenteken,
             "merk" => $autoApiResponse->merk,
             "bouwjaar" => $bouwjaar,
             "carrosserie" => Http::get($autoApiResponse->api_gekentekende_voertuigen_carrosserie."?kenteken=".$autoApiResponse->kenteken)->json()[0]["type_carrosserie_europese_omschrijving"],
