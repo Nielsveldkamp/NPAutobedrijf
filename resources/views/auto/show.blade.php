@@ -56,9 +56,8 @@
                                 </div>
                             </td>
                             <td>
-                                <div style="display: flex; align-items: baseline;">
-                                    
-                                    <b >
+                                <div>                                        
+                                    <b style="white-space: nowrap;" >
                                         € {{ $auto->vraagprijs }}
                                     </b>
                                 </div>
