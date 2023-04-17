@@ -17,14 +17,14 @@
                 @error('titel')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
-                <x-label class="mt-4" for="titel" :value="__('titel')" />
+                <x-label class="mt-4" for="titel" :value="__('titel*')" />
                 <x-input maxlength="255" id="titel" class="block mt-2 w-full" type="text" name="titel"
                 value="{{ old('titel', $auto->titel) }}" autofocus />
 
                 @error('vraagprijs')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
-                <x-label class="mt-4" for="vraagprijs" :value="__('vraagprijs')" />
+                <x-label class="mt-4" for="vraagprijs" :value="__('vraagprijs*')" />
                 <span style="margin-left:-1rem;">€</span>
                 <input class="ml-1 rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-2"
                 maxlength="255" id="vraagprijs" type="number" name="vraagprijs" value="{{ old('vraagprijs', $auto->vraagprijs) }}">
@@ -32,14 +32,14 @@
                 @error('transmissie')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
-                <x-label class="mt-4" for="transmissie" :value="__('transmissie')" />
+                <x-label class="mt-4" for="transmissie" :value="__('transmissie*')" />
                 <x-input maxlength="255" id="transmissie" class="block mt-2 w-full" type="text" name="transmissie"
                  value="{{ old('transmissie', $auto->transmissie) }}"/>
 
                 @error('BTW')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
-                <x-label class="mt-4" for="titel" :value="__('BTW')" />
+                <x-label class="mt-4" for="titel" :value="__('BTW*')" />
                 <input type="radio" name="BTW" value="ja, BTW" {{(empty(old('BTW')) && $auto->BTW=="ja, BTW")?"checked" :((old('BTW') =="ja, BTW")?"checked":"")}} > ja, BTW
                 <input type="radio" name="BTW" value="nee, marge" class="ml-4"{{(empty(old('BTW')) && $auto->BTW=="nee, marge")?"checked" :((old('BTW') =="nee, marge")?"checked":"")}}  > nee, marge 
                 
@@ -60,7 +60,7 @@
                 @error('omschrijving')
                 <div class="alert text-sm text-red-600 alert-danger mt-4 -mb-4">{{ $message }}</div>
                 @enderror
-                <x-label class="mt-4" for="omschrijving" :value="__('omschrijving')" />
+                <x-label class="mt-4" for="omschrijving" :value="__('omschrijving*')" />
                 <textarea style="resize: none; max-height: 300px; height:15rem;" id="omschrijving"
                  class="block mt-2 w-full" type="text" name="omschrijving">{{ old('omschrijving', $auto->omschrijving) }}</textarea>
 
