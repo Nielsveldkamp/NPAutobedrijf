@@ -165,26 +165,25 @@ class AutoController extends Controller
                 $autoFile->name = $autoFile->id.$autoFile->name;
                 $autoFile->save();
                 $file->move('storage/'.$auto->kenteken, $autoFile->name);
-            }
+            } 
          }
         return redirect("/autos/$auto->merk/$auto->type/$auto->id");
     }
 
     public function index( Request $request)
     {
-        $autos  = Auto::paginate(10);
-        
+        $autos  = Auto::orderBy('created_at', 'desc')->paginate(10);
         return view('auto/index')->with('autos', $autos);   
     }
     public function indexMerk($merk, Request $request)
     {
-        $autos  = Auto::where('merk',$merk)->paginate(10);
+        $autos  = Auto::where('merk',$merk)->orderBy('created_at', 'desc')->paginate(10);
         return view('auto/index')->with('autos', $autos);   
     }
 
     public function indexMerkModel($merk, $model, Request $request)
     {
-        $autos  = Auto::where('merk',$merk)->where('type',$model)->paginate(10);
+        $autos  = Auto::where('merk',$merk)->where('type',$model)->orderBy('created_at', 'desc')->paginate(10);
         return view('auto/index')->with('autos', $autos);   
     }
 
@@ -195,6 +194,7 @@ class AutoController extends Controller
     public function change(Request $request,Auto $auto){
         return view('auto.change')->with('auto',$auto);
     }
+
     public function update(Request $request,Auto $auto){
         $rules = [
             "titel" => 'required|max:255',
@@ -210,7 +210,6 @@ class AutoController extends Controller
         $auto->vraagprijs = $request->vraagprijs;
         $auto->transmissie = $request->transmissie;
         $auto->BTW = $request->BTW;
-
 
         $websites = array_map(function($relUrl){        
             $ret = parse_url($relUrl);
