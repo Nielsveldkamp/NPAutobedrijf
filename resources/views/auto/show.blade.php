@@ -344,7 +344,7 @@
                             <td>
                                 <div style="display: flex; align-items: baseline;"> 
                                     <b >
-                                        € {{ $auto->vraagprijs }}
+                                        € {{ trim($auto->vraagprijs) }}
                                     </b>
                                 </div>
                             </td>
