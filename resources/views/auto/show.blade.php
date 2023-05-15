@@ -237,7 +237,7 @@
                         </tr>
                         @if( $auto->extraAccessoires)
                         <tr>
-                            <td>
+                            <td style="padding-top:2rem;">
                                 <b>
                                     Extra accessoires
                                 </b>
@@ -543,7 +543,7 @@
                         </tr>
                         @if( $auto->extraAccessoires)
                         <tr>
-                            <td>
+                            <td style="padding-top:2rem;">
                                 <b>
                                     Extra accessoires
                                 </b>
