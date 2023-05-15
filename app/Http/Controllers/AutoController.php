@@ -40,7 +40,7 @@ class AutoController extends Controller
            $request->validate($rules);
         }
         else{
-            $errors =["kenteken" => "kenteken is niet geregistreerd bij de ADW"];
+            $errors =["kenteken" => "kenteken is niet geregistreerd bij de RDW"];
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
                 $errors = array_merge($errors,$validator->messages()->get('*'));
@@ -293,7 +293,7 @@ class AutoController extends Controller
                     $query->where('vraagprijs','<',$request->tm);
                 }       
             }]
-        ])->paginate(10);
+        ])->orderBy('created_at', 'desc')->paginate(10);
         return view('auto.index')->with('autos',$autos);
     }
 
