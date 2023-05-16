@@ -31,7 +31,7 @@ class ContactGegevensController extends Controller
     public function store(Request $request,ContactGegevens $contactGegevens){
         
         $request->validate(["telefoonnummer" => 'required|max:15|
-        regex:/^([0-9\s\-\+\(\)]*)$/',
+        regex:/^(?:\+?\d{1,3}\s?)?(?:\(\d{1,4}\)|\d{1,4})[-\s]?\d{1,4}[-\s]?\d{1,9}$/',
             "email" => 'max:255|email:rfc,dns',
         ]);
         $contactGegevens->telefoonnummer = $request->telefoonnummer;
